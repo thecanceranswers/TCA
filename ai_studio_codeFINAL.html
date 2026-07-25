@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cancer Answers | Curious about Cancer?</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Outfit:wght@400;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-black: #050507;
+            --card-glass: rgba(20, 20, 25, 0.7);
+            --neon-cyan: #00f2ff;
+            --neon-purple: #bc13fe;
+            --neon-pink: #ff007a;
+            --text-silver: #e2e2e2;
+            --glass-border: rgba(255, 255, 255, 0.12);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+        body { background-color: var(--bg-black); color: var(--text-silver); font-family: 'Space Grotesk', sans-serif; line-height: 1.6; overflow-x: hidden; }
+        h1, h2, h3 { font-family: 'Outfit', sans-serif; text-transform: uppercase; }
+
+        .text-gradient {
+            background: linear-gradient(to right, #00f2ff, #bc13fe, #ff007a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        nav { backdrop-filter: blur(20px); padding: 0.8rem 5%; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid var(--glass-border); }
+        
+        .logo-wrapper { display: flex; align-items: center; gap: 15px; text-decoration: none; }
+        .nav-logo-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            padding: 4px 8px;
+            border-radius: 12px;
+        }
+        .nav-logo-img { 
+            height: 38px; 
+            width: auto; 
+            mix-blend-mode: screen; 
+            filter: contrast(110%) brightness(110%);
+        }
+        .logo-text { font-weight: 800; font-size: 1.2rem; color: white; letter-spacing: -1px; }
+
+        /* HERO - STATIC CLEAN LOGO */
+        .hero { 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            background: radial-gradient(circle at center, #151528 0%, #050507 100%); 
+            position: relative;
+            padding: 120px 5% 60px;
+        }
+        
+        .hero-branding {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-logo-blended { 
+            position: relative;
+            z-index: 1;
+            width: clamp(300px, 45vw, 520px);
+            height: auto;
+            mix-blend-mode: screen; 
+            -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+            mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+            filter: contrast(115%) brightness(105%);
+        }
+
+        .hero h1 { 
+            font-size: clamp(3rem, 9vw, 7.5rem); 
+            margin-top: -10px; 
+            letter-spacing: -3px; 
+            line-height: 0.9;
+        }
+
+        .hero h2 { 
+            font-size: clamp(1.5rem, 4vw, 3rem); 
+            color: var(--neon-cyan); 
+            font-weight: 300; 
+            margin-top: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .scroll-indicator { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); animation: bounce 2s infinite; color: var(--neon-cyan); font-size: 1.5rem; opacity: 0.7; }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);} 40% {transform: translateY(-10px) translateX(-50%);} }
+
+        .section { padding: 60px 5%; max-width: 1300px; margin: 0 auto; }
+        .section-title { font-size: clamp(2.5rem, 6vw, 4rem); text-align: center; margin-bottom: 40px; letter-spacing: -2px; }
+
+        /* CHATBASE EMBED CONTAINER */
+        #ask { padding-top: 120px; }
+        .chat-container-wrap { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            background: rgba(10, 10, 15, 0.9); 
+            border-radius: 40px; 
+            border: 1px solid var(--glass-border); 
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0, 242, 255, 0.05);
+            height: 600px; 
+        }
+        
+        .legal-disclaimer { 
+            font-size: 0.85rem; 
+            color: #666; 
+            max-width: 900px; 
+            margin: 25px auto 40px; 
+            line-height: 1.6; 
+            text-align: center;
+            padding: 20px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--glass-border);
+        }
+
+        /* INSTAGRAM BUTTON SECTION */
+        .insta-highlight {
+            background: linear-gradient(145deg, #0f0f15, #050507);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            padding: 60px 20px;
+            text-align: center;
+            max-width: 1100px;
+            margin: 0 auto 40px; 
+        }
+        .btn-giant-insta {
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white;
+            padding: 28px 45px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-size: clamp(1rem, 3.2vw, 1.7rem);
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            text-transform: uppercase;
+            transition: 0.4s;
+            box-shadow: 0 10px 40px rgba(220, 39, 67, 0.2);
+        }
+        .btn-giant-insta:hover { transform: translateY(-5px); box-shadow: 0 15px 50px rgba(220, 39, 67, 0.4); }
+
+        /* GRID */
+        .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .glass-box { background: var(--card-glass); border: 1px solid var(--glass-border); border-radius: 30px; padding: 40px; backdrop-filter: blur(15px); transition: 0.3s; }
+        .glass-box:hover { border-color: var(--neon-cyan); transform: translateY(-5px); }
+        .glass-box i { font-size: 2.2rem; color: var(--neon-cyan); margin-bottom: 15px; display: block; }
+
+        /* RISK SECTION */
+        .risk-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+        .risk-card { background: linear-gradient(145deg, #12121a, #08080c); border-radius: 40px; padding: 50px; border: 1px solid var(--glass-border); text-align: center; transition: 0.3s; text-decoration: none; color: inherit; }
+        .risk-card:hover { border-color: var(--neon-purple); transform: scale(1.02); }
+        .risk-icon-wrapper { width: 80px; height: 80px; background: rgba(188, 19, 254, 0.1); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; font-size: 2rem; color: var(--neon-purple); }
+
+        /* MISSION SECTION (About) */
+        .mission-box { text-align: left; max-width: 950px; margin: 0 auto; padding: 60px; border-radius: 40px; background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); position: relative; }
+        .mission-box p { margin-bottom: 25px; font-size: 1.2rem; line-height: 1.9; color: #ddd; }
+        .founder-note-title { font-family: 'Outfit', sans-serif; font-size: 1.6rem; color: var(--neon-cyan); margin-bottom: 20px; }
+        .founder-signature { margin-top: 40px; border-top: 1px solid var(--glass-border); padding-top: 30px; }
+        .founder-name { display: block; font-weight: 700; color: white; font-size: 1.1rem; }
+        .mission-slogan { text-align: center; margin-top: 40px; font-size: 2.2rem; font-weight: 800; }
+
+        .btn-main { background: var(--neon-cyan); color: black; padding: 20px 50px; border-radius: 100px; text-decoration: none; font-weight: 800; display: inline-block; transition: 0.3s; border: none; cursor: pointer; text-transform: uppercase; font-family: 'Outfit'; }
+        .btn-main:hover { letter-spacing: 1px; box-shadow: 0 0 20px var(--neon-cyan); }
+
+        footer { padding: 80px 5%; background: #000; border-top: 1px solid var(--glass-border); text-align: center; }
+        .footer-logo-blended { height: 70px; width: auto; mix-blend-mode: screen; filter: contrast(110%); margin-bottom: 20px; }
+        .source-link { color: var(--neon-cyan); text-decoration: none; font-weight: 500; padding: 12px 25px; border: 1px solid var(--neon-cyan); border-radius: 50px; transition: 0.3s; display: inline-block; }
+        .source-link:hover { background: var(--neon-cyan); color: black; }
+
+        @media (max-width: 992px) { .project-grid, .risk-container { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo-wrapper">
+            <div class="nav-logo-badge">
+                <img src="logo.png" alt="Logo" class="nav-logo-img">
+            </div>
+            <span class="logo-text">THE <span class="text-gradient">CANCER</span> ANSWERS</span>
+        </a>
+        <div style="display: flex; gap: 15px;">
+            <a href="#ask" class="btn-main" style="padding: 10px 25px; font-size: 0.75rem;">LAUNCH CHAT</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-branding">
+            <div class="hero-logo-container">
+                <img src="logo.png" alt="The Cancer Answers Logo" class="hero-logo-blended">
+            </div>
+            <h1 class="text-gradient">Curious about Cancer?</h1>
+            <h2>Get the Answer!</h2>
+        </div>
+        <div class="hero-content">
+            <p style="max-width: 650px; margin: 20px auto 40px; color: #aaa; font-size: 1.3rem; font-weight: 300;">
+                The world’s first AI health hub built specifically for youth.<br>
+                Real Facts. Trusted Sources. No Myths.
+            </p>
+            <a href="#ask" class="btn-main">Talk to the AI</a>
+        </div>
+        <div class="scroll-indicator"><i class="fas fa-chevron-down"></i></div>
+    </section>
+
+    <!-- CHAT SECTION -->
+    <section id="ask" class="section">
+        <h2 class="section-title text-gradient">Ask Your Question</h2>
+        
+        <div class="chat-container-wrap">
+            <iframe
+                src="https://www.chatbase.co/chatbot-iframe/m8TVz1kayXo2czK_Iy7P2"
+                width="100%"
+                style="height: 100%; min-height: 600px"
+                frameborder="0"
+            ></iframe>
+        </div>
+
+        <div class="legal-disclaimer">
+            <strong>EDUCATIONAL DISCLAIMER:</strong> This website is for informational and educational purposes only. The content provided by the CancerAnswer AI is not intended to be a substitute for professional medical advice, diagnosis, or treatment. Please note: AI models can make mistakes and may provide inaccurate information. Always seek the advice of your physician or another qualified health provider with any questions you may have regarding a medical condition.
+        </div>
+    </section>
+
+    <!-- INSTAGRAM SECTION -->
+    <section class="section" style="padding-top: 0;">
+        <div class="insta-highlight">
+            <h3 style="margin-bottom: 35px; font-size: 1.5rem; letter-spacing: 1px;">Join the Community</h3>
+            <a href="https://www.instagram.com/the_cancer_answers/" target="_blank" class="btn-giant-insta">
+                <i class="fab fa-instagram"></i>
+                Click Here and Follow on Instagram!
+            </a>
+            <p style="margin-top: 25px; color: #888; font-size: 1.05rem;">Follow @the_cancer_answers for more about cancer prevention and learn how to lower your risk!</p>
+        </div>
+    </section>
+
+    <!-- TEEN EDITION FACTS -->
+    <section class="section" style="padding-top: 0;">
+        <h2 class="section-title">understanding cancer: <span class="text-gradient">teen edition</span></h2>
+        <div class="project-grid">
+            <div class="glass-box">
+                <i class="fas fa-bolt"></i>
+                <h3>Vape Myths</h3>
+                <p>E-cigs aren't just water vapor; they contain heavy metals like nickel and lead that can damage lung DNA.</p>
+            </div>
+            <div class="glass-box">
+                <i class="fas fa-sun"></i>
+                <h3>Sun Power</h3>
+                <p>Just one blistering sunburn in your teens can double your risk of developing melanoma later in life.</p>
+            </div>
+            <div class="glass-box">
+                <i class="fas fa-shield-virus"></i>
+                <h3>HPV Shield</h3>
+                <p>The HPV vaccine blocks certain cancers before they even start. It's most effective during your teen years.</p>
+            </div>
+            <div class="glass-box">
+                <i class="fas fa-dna"></i>
+                <h3>Internal Repair</h3>
+                <p>Regular movement and sleep aren't just for looks—they help your body’s "cleanup crew" repair genetic errors.</p>
+            </div>
+            <div class="glass-box">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Alcohol Facts</h3>
+                <p>Alcohol is classified as a Group 1 carcinogen, meaning there is strong evidence it causes cancer in humans.</p>
+            </div>
+            <div class="glass-box">
+                <i class="fas fa-heart"></i>
+                <h3>Prevention</h3>
+                <p>Simple daily choices and avoiding tobacco can prevent about 30-50% of all cancers worldwide.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCIENCE OF RISK -->
+    <section id="science" class="section">
+        <h2 class="section-title">The <span class="text-gradient">Science</span> of Risk</h2>
+        <div class="risk-container">
+            <a href="https://www.cancer.gov/about-cancer/understanding/what-is-cancer" target="_blank" class="risk-card">
+                <div class="risk-icon-wrapper"><i class="fas fa-microscope"></i></div>
+                <h3 class="text-gradient">What is Cancer?</h3>
+                <p>It’s when cells start growing out of control because their DNA instructions got glitched. Find out the biological basics.</p>
+                <div style="margin-top: 15px; font-size: 0.8rem; color: var(--neon-cyan);">Source: National Cancer Institute &rarr;</div>
+            </a>
+            <a href="https://www.cdc.gov/tobacco/basic_information/e-cigarettes/Quick-Facts-on-the-Risks-of-E-cigarettes-for-Kids-Teens-and-Young-Adults.html" target="_blank" class="risk-card">
+                <div class="risk-icon-wrapper"><i class="fas fa-lungs"></i></div>
+                <h3 class="text-gradient">Vaping & Smoking</h3>
+                <p>Toxins from nicotine products can "punch holes" in your DNA. See the latest CDC research on young lungs.</p>
+                <div style="margin-top: 15px; font-size: 0.8rem; color: var(--neon-cyan);">Source: CDC &rarr;</div>
+            </a>
+            <a href="https://www.cdc.gov/cancer/skin/basic_info/sun-safety.htm" target="_blank" class="risk-card">
+                <div class="risk-icon-wrapper"><i class="fas fa-sun"></i></div>
+                <h3 class="text-gradient">UV & Tanning</h3>
+                <p>UV rays are energy intense enough to break molecular bonds in your skin. Learn why SPF is your primary defense.</p>
+                <div style="margin-top: 15px; font-size: 0.8rem; color: var(--neon-cyan);">Source: CDC &rarr;</div>
+            </a>
+            <a href="https://www.who.int/news-room/fact-sheets/detail/cancer" target="_blank" class="risk-card">
+                <div class="risk-icon-wrapper"><i class="fas fa-heart"></i></div>
+                <h3 class="text-gradient">Prevention</h3>
+                <p>Prevention isn't a lecture—it's strategy. Discover how daily habits can prevent nearly 50% of all cancer cases.</p>
+                <div style="margin-top: 15px; font-size: 0.8rem; color: var(--neon-cyan);">Source: WHO &rarr;</div>
+            </a>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="section">
+        <h2 class="section-title">About <span class="text-gradient">The Project</span></h2>
+        <div class="mission-box">
+            <p>The Cancer Answers is an international youth-led initiative dedicated to making cancer knowledge more accessible, understandable, and actionable for communities worldwide. Through research-based education, digital resources, and outreach, we work to advance cancer awareness, prevention, and health literacy.</p>
+            
+            <p>Our AI chatbot and educational tools translate complex medical research into clear and reliable resources with the goal of helping individuals and families better understand cancer risks, prevention strategies, and treatment options.</p>
+            
+            <p>Founded by students passionate about medicine, science, and advocacy, The Cancer Answers empowers communities with the knowledge needed to make informed health decisions.</p>
+
+            <div class="founder-note">
+                <h3 class="founder-note-title">A Note From The Founders</h3>
+                <p>The Cancer Answers was blossomed out of an interest in public health and how technology can make complex information easier to understand. We created this website to give teenagers a place to ask honest questions about cancer risk and get answers based on real, trusted sources. Topics like vaping, tanning, and long-term health risks are often discussed online, but not always with clear or reliable information.</p>
+                
+                <p>This project uses AI trained on sources such as the Centers for Disease Control and Prevention, National Cancer Institute, and American Cancer Society to provide accurate, easy-to-understand responses.</p>
+                
+                <p>We are especially interested in how AI can be designed responsibly—so that it informs rather than misleads—and how it can be used to positively impact and improve health education for young people.</p>
+            </div>
+
+            <div class="founder-signature">
+                <span class="founder-name">Jaya Goud, Founder and Executive Director</span>
+                <span class="founder-name">Kaiya Goud, Founder and Director of Community Engagement</span>
+            </div>
+
+            <div class="mission-slogan text-gradient">Learn more, risk less.</div>
+        </div>
+    </section>
+
+    <footer>
+        <img src="logo.png" alt="Footer Logo" class="footer-logo-blended">
+        <h2 class="logo-text" style="font-size: 1.8rem; margin-bottom: 40px;">THE CANCER ANSWERS</h2>
+        
+        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin-bottom: 30px;">
+            <a href="https://www.cdc.gov" target="_blank" class="source-link">CDC</a>
+            <a href="https://www.cancer.gov" target="_blank" class="source-link">NCI</a>
+            <a href="https://www.who.int" target="_blank" class="source-link">WHO</a>
+            <a href="https://www.cancer.org" target="_blank" class="source-link">ACS</a>
+            <a href="https://www.nih.gov" target="_blank" class="source-link">NIH</a>
+        </div>
+        <p style="color: #444; font-size: 0.9rem;">&copy; 2025 THE CANCER ANSWERS PROJECT. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <!-- Chatbase Script -->
+    <script>
+    (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="m8TVz1kayXo2czK_Iy7P2";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+    </script>
+</body>
+</html>
